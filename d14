@@ -1,0 +1,121 @@
+public class ClassInformation {
+    public static void main(String[] args) {
+        Class<?> stringClass = String.class;
+
+        System.out.println("Class Name: " + stringClass.getName());
+        System.out.println("Superclass Name: " + stringClass.getSuperclass().getName());
+        System.out.println("Is Interface? " + stringClass.isInterface());
+    }
+}
+Question 2: Creating an ArrayList Using Reflection
+
+java
+Copy code
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+
+public class DynamicArrayList {
+    public static void main(String[] args) throws Exception {
+        Class<?> arrayListClass = ArrayList.class;
+        Constructor<?> constructor = arrayListClass.getConstructor();
+
+        ArrayList<String> dynamicList = (ArrayList<String>) constructor.newInstance();
+        dynamicList.add("Hello");
+        dynamicList.add("World");
+
+        System.out.println(dynamicList);
+    }
+}
+Question 3: Accessing and Modifying a Private Field Using Reflection
+
+java
+Copy code
+import java.lang.reflect.Field;
+
+class MyClass {
+    private String name = "Initial Name";
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class ModifyPrivateField {
+    public static void main(String[] args) throws Exception {
+        MyClass myClass = new MyClass();
+
+        Field nameField = MyClass.class.getDeclaredField("name");
+        nameField.setAccessible(true);
+        nameField.set(myClass, "John Doe");
+
+        System.out.println("Updated Name: " + myClass.getName());
+    }
+}
+Question 4: Invoking a Method Using Reflection
+
+java
+Copy code
+import java.lang.reflect.Method;
+
+class MyClass {
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+}
+
+public class InvokeMethodReflection {
+    public static void main(String[] args) throws Exception {
+        MyClass myClass = new MyClass();
+
+        Method printMessageMethod = MyClass.class.getMethod("printMessage", String.class);
+        printMessageMethod.invoke(myClass, "Hello, World!");
+    }
+}
+Question 5-8: SQL Queries for Employee Table
+
+sql
+Copy code
+-- Create the "employees" table
+CREATE TABLE employees (
+ id INTEGER PRIMARY KEY,
+ name TEXT,
+ age INTEGER,
+ salary REAL
+);
+
+-- Insert two rows of data into the "employees" table
+INSERT INTO employees (name, age, salary) VALUES ('John Doe', 30, 50000.50);
+INSERT INTO employees (name, age, salary) VALUES ('Jane Smith', 28, 55000.75);
+
+-- Calculate the average salary of all employees
+SELECT AVG(salary) AS avg_salary FROM employees;
+
+-- Retrieve the employees sorted by their age in descending order
+SELECT * FROM employees ORDER BY age DESC;
+Question 9: Creating "departments" and "employees" Tables with Foreign Key Constraint
+
+sql
+Copy code
+-- Create the "departments" table
+CREATE TABLE departments (
+ dept_id INT PRIMARY KEY,
+ department_name VARCHAR(50)
+);
+
+-- Create the "employees" table with a foreign key constraint
+CREATE TABLE employees (
+ emp_id INT PRIMARY KEY,
+ name VARCHAR(50),
+ age INT,
+ salary FLOAT,
+ department_id INT,
+ FOREIGN KEY (department_id) REFERENCES departments(dept_id)
+);
+Question 10: Performing a Self-Join in SQL
+A self-join is used to combine rows from the same table based on a related column. In this example, we assume the "employees" table has a column named "manager_id" that references the "emp_id" column within the same table. This allows us to join the table with itself to retrieve the names of employees and their corresponding managers.
+
+sql
+Copy code
+SELECT e1.name AS employee_name, e2.name AS manager_name
+FROM employees e1
+JOIN employees e2 ON e1.manager_id = e2.emp_id;
