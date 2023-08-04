@@ -1,0 +1,238 @@
+Question 1 - Implementation of Java Generics using ArrayList:
+
+java
+Copy code
+import java.util.ArrayList;
+
+public class GenericsArrayListDemo {
+    public static void main(String[] args) {
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add("Hello");
+        stringList.add("World");
+
+        ArrayList<Integer> intList = new ArrayList<>();
+        intList.add(10);
+        intList.add(20);
+
+        System.out.println("String List: " + stringList);
+        System.out.println("Integer List: " + intList);
+    }
+}
+Question 2 - Implementation of Java Generics using Map:
+
+java
+Copy code
+import java.util.HashMap;
+import java.util.Map;
+
+public class GenericsMapDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> ageMap = new HashMap<>();
+        ageMap.put("Alice", 25);
+        ageMap.put("Bob", 30);
+
+        System.out.println("Age Map: " + ageMap);
+    }
+}
+Question 3 - Implementation of Java Generics using Generic Class:
+
+java
+Copy code
+public class GenericClassDemo<T> {
+    private T value;
+
+    public GenericClassDemo(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+    public static void main(String[] args) {
+        GenericClassDemo<String> stringBox = new GenericClassDemo<>("Hello");
+        System.out.println("String Value: " + stringBox.getValue());
+
+        GenericClassDemo<Integer> intBox = new GenericClassDemo<>(10);
+        System.out.println("Integer Value: " + intBox.getValue());
+    }
+}
+Question 4 - Implementation of Java Generics using Generic Class and Generic Method:
+
+java
+Copy code
+public class GenericMethodDemo {
+    public static <T> void displayArray(T[] arr) {
+        for (T element : arr) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Integer[] intArray = {1, 2, 3, 4, 5};
+        String[] strArray = {"Hello", "World"};
+
+        displayArray(intArray);
+        displayArray(strArray);
+    }
+}
+Question 5 - Implementation of Wildcards in Java Generics:
+
+java
+Copy code
+import java.util.ArrayList;
+import java.util.List;
+
+public class WildcardsDemo {
+    public static void printList(List<?> list) {
+        for (Object item : list) {
+            System.out.print(item + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        List<Integer> intList = new ArrayList<>();
+        intList.add(10);
+        intList.add(20);
+
+        List<String> strList = new ArrayList<>();
+        strList.add("Hello");
+        strList.add("World");
+
+        printList(intList);
+        printList(strList);
+    }
+}
+Question 6 - Generic Version of a Box Class:
+
+java
+Copy code
+public class GenericBox<T> {
+    private T value;
+
+    public GenericBox(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+    public static void main(String[] args) {
+        GenericBox<Integer> intBox = new GenericBox<>(10);
+        System.out.println("Integer Value: " + intBox.getValue());
+
+        GenericBox<String> strBox = new GenericBox<>("Hello");
+        System.out.println("String Value: " + strBox.getValue());
+    }
+}
+Question 7 - Implementing Autoboxing in Java:
+
+java
+Copy code
+public class AutoboxingDemo {
+    public static void main(String[] args) {
+        // Autoboxing: converting primitive int to Integer
+        Integer num1 = 10;
+
+        // Auto-unboxing: converting Integer to primitive int
+        int num2 = num1;
+
+        System.out.println("num1: " + num1);
+        System.out.println("num2: " + num2);
+    }
+}
+Question 8 - Implementing Unboxing in Java:
+
+java
+Copy code
+public class UnboxingDemo {
+    public static void main(String[] args) {
+        Integer num1 = new Integer(20);
+
+        // Unboxing: converting Integer to primitive int
+        int num2 = num1.intValue();
+
+        System.out.println("num1: " + num1);
+        System.out.println("num2: " + num2);
+    }
+}
+Question 9 - Filtering Collection using Stream:
+
+java
+Copy code
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamFilterDemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        numbers.add(50);
+
+        List<Integer> evenNumbers = numbers.stream()
+                                           .filter(num -> num % 2 == 0)
+                                           .collect(Collectors.toList());
+
+        System.out.println("Even Numbers: " + evenNumbers);
+    }
+}
+Question 10 - Finding Max and Min Product Price using Java Streams:
+
+java
+Copy code
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+class Product {
+    private int id;
+    private String name;
+    private double price;
+
+    public Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
+}
+
+public class MaxMinProductPriceDemo {
+    public static void main(String[] args) {
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(1, "Product A", 100.0));
+        products.add(new Product(2, "Product B", 200.0));
+        products.add(new Product(3, "Product C", 150.0));
+        products.add(new Product(4, "Product D", 300.0));
+
+        Product maxPriceProduct = products.stream()
+                .max(Comparator.comparing(Product::getPrice))
+                .orElse(null);
+
+        Product minPriceProduct = products.stream()
+                .min(Comparator.comparing(Product::getPrice))
+                .orElse(null);
+
+        System.out.println("Max Price Product: " + maxPriceProduct);
+        System.out.println("Min Price Product: " + minPriceProduct);
+    }
+}
