@@ -1,0 +1,224 @@
+Question 1: Implement List Interface in Java
+
+java
+Copy code
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListInterfaceDemo {
+    public static void main(String[] args) {
+        List<String> names = new ArrayList<>();
+        names.add("John");
+        names.add("Alice");
+        names.add("Bob");
+
+        System.out.println("Names: " + names);
+    }
+}
+Question 2: Implementation of List Interface Methods
+
+java
+Copy code
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListMethodsDemo {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        
+        // Adding elements
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+        
+        // Updating an element
+        fruits.set(1, "Grapes");
+        
+        // Searching for an element
+        int index = fruits.indexOf("Apple");
+        
+        // Removing an element
+        fruits.remove("Orange");
+        
+        // Accessing an element
+        String fruit = fruits.get(index);
+        
+        System.out.println("Fruits: " + fruits);
+        System.out.println("Accessed Fruit: " + fruit);
+    }
+}
+Question 3: Check if Element is Present in List
+
+java
+Copy code
+import java.util.ArrayList;
+import java.util.List;
+
+public class CheckElementInList {
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+
+        int elementToCheck = 20;
+
+        boolean isPresent = numbers.contains(elementToCheck);
+
+        if (isPresent) {
+            System.out.println(elementToCheck + " is present in the list.");
+        } else {
+            System.out.println(elementToCheck + " is not present in the list.");
+        }
+    }
+}
+Question 4: Implement Set Interface in Java
+
+java
+Copy code
+import java.util.HashSet;
+import java.util.Set;
+
+public class SetInterfaceDemo {
+    public static void main(String[] args) {
+        Set<String> uniqueNames = new HashSet<>();
+        uniqueNames.add("John");
+        uniqueNames.add("Alice");
+        uniqueNames.add("Bob");
+
+        System.out.println("Unique Names: " + uniqueNames);
+    }
+}
+Question 5: Union, Difference, and Intersection of Set Interface
+
+java
+Copy code
+import java.util.HashSet;
+import java.util.Set;
+
+public class SetOperationsDemo {
+    public static void main(String[] args) {
+        Set<Integer> set1 = new HashSet<>();
+        set1.add(1);
+        set1.add(2);
+        set1.add(3);
+
+        Set<Integer> set2 = new HashSet<>();
+        set2.add(3);
+        set2.add(4);
+        set2.add(5);
+
+        // Union
+        Set<Integer> union = new HashSet<>(set1);
+        union.addAll(set2);
+
+        // Difference
+        Set<Integer> difference = new HashSet<>(set1);
+        difference.removeAll(set2);
+
+        // Intersection
+        Set<Integer> intersection = new HashSet<>(set1);
+        intersection.retainAll(set2);
+
+        System.out.println("Union: " + union);
+        System.out.println("Difference: " + difference);
+        System.out.println("Intersection: " + intersection);
+    }
+}
+Question 6: Implementation of Sorted Set Operations
+
+java
+Copy code
+import java.util.*;
+
+public class SortedSetDemo {
+    public static void main(String[] args) {
+        SortedSet<Integer> numbers = new TreeSet<>();
+        numbers.add(10);
+        numbers.add(5);
+        numbers.add(20);
+
+        System.out.println("Sorted Numbers: " + numbers);
+        System.out.println("First Element: " + numbers.first());
+        System.out.println("Last Element: " + numbers.last());
+
+        // Accessing elements greater than or equal to a value
+        SortedSet<Integer> greaterThanFive = numbers.tailSet(5);
+        System.out.println("Numbers greater than or equal to 5: " + greaterThanFive);
+
+        // Iterating through the set
+        for (Integer num : numbers) {
+            System.out.println(num);
+        }
+    }
+}
+Question 7: Implement HashSet in Java
+
+java
+Copy code
+import java.util.HashSet;
+import java.util.Set;
+
+public class HashSetDemo {
+    public static void main(String[] args) {
+        Set<String> cities = new HashSet<>();
+        cities.add("New York");
+        cities.add("London");
+        cities.add("Paris");
+        cities.add("Tokyo");
+
+        System.out.println("Cities: " + cities);
+    }
+}
+Question 8: Implement EnumSet in Java
+
+java
+Copy code
+import java.util.EnumSet;
+
+enum Days {
+    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+}
+
+public class EnumSetDemo {
+    public static void main(String[] args) {
+        EnumSet<Days> workingDays = EnumSet.range(Days.MONDAY, Days.FRIDAY);
+
+        System.out.println("Working Days: " + workingDays);
+    }
+}
+Question 9: Implement LinkedHashSet in Java
+
+java
+Copy code
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class LinkedHashSetDemo {
+    public static void main(String[] args) {
+        Set<String> colors = new LinkedHashSet<>();
+        colors.add("Red");
+        colors.add("Green");
+        colors.add("Blue");
+
+        System.out.println("Colors: " + colors);
+    }
+}
+Question 10: Implement TreeSet in Java
+
+java
+Copy code
+import java.util.Set;
+import java.util.TreeSet;
+
+public class TreeSetDemo {
+    public static void main(String[] args) {
+        Set<String> animals = new TreeSet<>();
+        animals.add("Lion");
+        animals.add("Elephant");
+        animals.add("Tiger");
+        animals.add("Giraffe");
+
+        System.out.println("Animals: " + animals);
+    }
+}
