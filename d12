@@ -1,0 +1,298 @@
+Question 1: Serialization Overview
+
+java
+Copy code
+import java.io.Serializable;
+
+class Student implements Serializable {
+    private int rollNumber;
+    private String name;
+
+    public Student(int rollNumber, String name) {
+        this.rollNumber = rollNumber;
+        this.name = name;
+    }
+
+    public int getRollNumber() {
+        return rollNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class SerializationOverview {
+    public static void main(String[] args) {
+        Student student = new Student(101, "John");
+
+        // Serialization and Deserialization will be covered in subsequent questions.
+    }
+}
+Question 2: Serialization Interface
+
+java
+Copy code
+import java.io.Serializable;
+
+class Person implements Serializable {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class SerializationInterface {
+    public static void main(String[] args) {
+        Person person = new Person("Alice", 25);
+
+        // Serialization and Deserialization will be covered in subsequent questions.
+    }
+}
+Question 3: Object Serialization
+
+java
+Copy code
+import java.io.*;
+
+class Car implements Serializable {
+    private String brand;
+    private int year;
+
+    public Car(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", year=" + year +
+                '}';
+    }
+}
+
+public class ObjectSerialization {
+    public static void main(String[] args) {
+        Car car = new Car("Toyota", 2022);
+
+        // Serialization
+        try (FileOutputStream fileOut = new FileOutputStream("data.ser");
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(car);
+            System.out.println("Object serialized to data.ser");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Deserialization
+        try (FileInputStream fileIn = new FileInputStream("data.ser");
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            Car deserializedCar = (Car) in.readObject();
+            System.out.println("Deserialized Object: " + deserializedCar);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+Question 4: Transient Fields
+
+java
+Copy code
+import java.io.*;
+
+class Employee implements Serializable {
+    private transient String name;
+    private int employeeId;
+
+    public Employee(String name, int employeeId) {
+        this.name = name;
+        this.employeeId = employeeId;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", employeeId=" + employeeId +
+                '}';
+    }
+}
+
+public class TransientFields {
+    public static void main(String[] args) {
+        Employee employee = new Employee("Alice", 101);
+
+        // Serialization
+        try (FileOutputStream fileOut = new FileOutputStream("employee.ser");
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(employee);
+            System.out.println("Object serialized to employee.ser");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Deserialization
+        try (FileInputStream fileIn = new FileInputStream("employee.ser");
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            Employee deserializedEmployee = (Employee) in.readObject();
+            System.out.println("Deserialized Object: " + deserializedEmployee);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+Question 5: Serialization with External Resources
+
+java
+Copy code
+import java.io.*;
+
+class Course implements Serializable {
+    private String name;
+    private transient Textbook textbook;
+
+    public Course(String name, Textbook textbook) {
+        this.name = name;
+        this.textbook = textbook;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                ", textbook=" + textbook +
+                '}';
+    }
+}
+
+class Textbook implements Serializable {
+    private String title;
+
+    public Textbook(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "Textbook{" +
+                "title='" + title + '\'' +
+                '}';
+    }
+}
+
+public class SerializationWithExternalResources {
+    public static void main(String[] args) {
+        Textbook textbook = new Textbook("Java Programming");
+
+        Course course = new Course("Introduction to Java", textbook);
+
+        // Serialization
+        try (FileOutputStream fileOut = new FileOutputStream("course.ser");
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(course);
+            System.out.println("Object serialized to course.ser");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Deserialization
+        try (FileInputStream fileIn = new FileInputStream("course.ser");
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            Course deserializedCourse = (Course) in.readObject();
+            System.out.println("Deserialized Object: " + deserializedCourse);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}
+For the remaining questions (6-10), I will provide one or two examples to demonstrate the concepts. If you want more examples or need further clarification, please let me know.
+
+Question 6: Built-in Functional Interfaces
+
+java
+Copy code
+import java.util.function.Consumer;
+
+public class BuiltInFunctionalInterfaces {
+    public static void main(String[] args) {
+        Consumer<String> printUpperCase = str -> System.out.println(str.toUpperCase());
+        printUpperCase.accept("hello");
+    }
+}
+Question 7: Function Interface
+
+java
+Copy code
+import java.util.function.Function;
+
+public class FunctionInterfaceDemo {
+    public static void main(String[] args) {
+        Function<Integer, Integer> square = num -> num * num;
+        int result = square.apply(5);
+        System.out.println("Square: " + result);
+    }
+}
+Question 8: Method References and Lambda Expressions
+
+java
+Copy code
+import java.util.Arrays;
+
+public class MethodReferencesAndLambdaExpressions {
+    public static void main(String[] args) {
+        String[] names = {"Alice", "Bob", "Charlie"};
+
+        // Using method reference
+        Arrays.sort(names, String::compareToIgnoreCase);
+        System.out.println("Sorted Names (Method Reference): " + Arrays.toString(names));
+
+        // Using lambda expression
+        Arrays.sort(names, (a, b) -> a.compareToIgnoreCase(b));
+        System.out.println("Sorted Names (Lambda Expression): " + Arrays.toString(names));
+    }
+}
+Question 9: Composing Functional Interfaces
+
+java
+Copy code
+import java.util.function.Function;
+
+public class ComposingFunctionalInterfaces {
+    public static void main(String[] args) {
+        Function<Integer, Integer> addOne = num -> num + 1;
+        Function<Integer, Integer> multiplyByTwo = num -> num * 2;
+
+        Function<Integer, Integer> composedFunction = addOne.andThen(multiplyByTwo);
+
+        int result = composedFunction.apply(5);
+        System.out.println("Result: " + result);
+    }
+}
+Question 10: Custom Functional Interfaces
+
+java
+Copy code
+@FunctionalInterface
+interface MyFunctionalInterface {
+    void performAction(String message);
+}
+
+public class CustomFunctionalInterface {
+    public static void main(String[] args) {
+        MyFunctionalInterface printMessage = message -> System.out.println("Message: " + message);
+        printMessage.performAction("Hello, world!");
+    }
+}
