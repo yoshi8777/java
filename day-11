@@ -1,0 +1,176 @@
+Question 1: Map Interface
+
+java
+Copy code
+import java.util.*;
+
+public class MapInterfaceDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> ageMap = new HashMap<>();
+        ageMap.put("John", 25);
+        ageMap.put("Alice", 30);
+        ageMap.put("Bob", 28);
+
+        System.out.println("Age of Alice: " + ageMap.get("Alice"));
+        System.out.println("Contains key 'Bob': " + ageMap.containsKey("Bob"));
+    }
+}
+Question 2: Legacy Collection Classes (Vector)
+
+java
+Copy code
+import java.util.*;
+
+public class VectorDemo {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+        names.add("John");
+        names.add("Alice");
+        names.add("Bob");
+
+        System.out.println("Names: " + names.toString());
+        System.out.println("Size: " + names.size());
+    }
+}
+Question 3: Collections Utility Class (Sorting)
+
+java
+Copy code
+import java.util.*;
+
+public class SortingDemo {
+    public static void main(String[] args) {
+        List<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Orange");
+
+        Collections.sort(fruits);
+
+        System.out.println("Sorted Fruits: " + fruits.toString());
+    }
+}
+Question 4: Iterators
+
+java
+Copy code
+import java.util.*;
+
+public class IteratorDemo {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        Iterator<Integer> iterator = numbers.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+Question 5: Map Implementations (HashMap)
+
+java
+Copy code
+import java.util.*;
+
+public class HashMapDemo {
+    public static void main(String[] args) {
+        Map<String, String> capitals = new HashMap<>();
+        capitals.put("USA", "Washington, D.C.");
+        capitals.put("UK", "London");
+        capitals.put("India", "New Delhi");
+
+        System.out.println("Capital of UK: " + capitals.get("UK"));
+        System.out.println("Contains key 'India': " + capitals.containsKey("India"));
+    }
+}
+Question 6: Map Operations (Remove)
+
+java
+Copy code
+import java.util.*;
+
+public class RemoveFromHashMapDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("John", 85);
+        scores.put("Alice", 90);
+        scores.put("Bob", 78);
+
+        scores.remove("Alice");
+
+        System.out.println("Updated Scores: " + scores.toString());
+    }
+}
+Question 7: Map Iteration
+
+java
+Copy code
+import java.util.*;
+
+public class MapIterationDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> subjects = new HashMap<>();
+        subjects.put("Math", 90);
+        subjects.put("Science", 85);
+        subjects.put("English", 95);
+
+        for (Map.Entry<String, Integer> entry : subjects.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
+Question 8: Using LinkedHashMap
+
+java
+Copy code
+import java.util.*;
+
+public class LinkedHashMapDemo {
+    public static void main(String[] args) {
+        Map<String, String> countries = new LinkedHashMap<>();
+        countries.put("USA", "New York");
+        countries.put("UK", "London");
+        countries.put("India", "Mumbai");
+
+        System.out.println("Countries and Capitals: " + countries.toString());
+    }
+}
+Question 9: Difference Between HashMap and LinkedHashMap
+
+java
+Copy code
+import java.util.*;
+
+public class HashMapVsLinkedHashMapDemo {
+    public static void main(String[] args) {
+        Map<String, String> hashMap = new HashMap<>();
+        hashMap.put("John", "Engineer");
+        hashMap.put("Alice", "Doctor");
+        hashMap.put("Bob", "Teacher");
+
+        Map<String, String> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("John", "Engineer");
+        linkedHashMap.put("Alice", "Doctor");
+        linkedHashMap.put("Bob", "Teacher");
+
+        System.out.println("HashMap: " + hashMap.toString());
+        System.out.println("LinkedHashMap: " + linkedHashMap.toString());
+    }
+}
+Question 10: Using Hashtable
+
+java
+Copy code
+import java.util.*;
+
+public class HashtableDemo {
+    public static void main(String[] args) {
+        Hashtable<String, Integer> ages = new Hashtable<>();
+        ages.put("John", 25);
+        ages.put("Alice", 30);
+        ages.put("Bob", 28);
+
+        System.out.println("Age of Alice: " + ages.get("Alice"));
+        System.out.println("Contains key 'Bob': " + ages.containsKey("Bob"));
+    }
+}
