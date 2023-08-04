@@ -1,0 +1,355 @@
+Question 1: Create and Start a New Thread
+
+java
+Copy code
+class NumberPrinter extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(i);
+        }
+    }
+}
+
+public class ThreadExample {
+    public static void main(String[] args) {
+        NumberPrinter thread = new NumberPrinter();
+        thread.start();
+    }
+}
+Question 2: Increment and Decrement with Synchronization
+
+java
+Copy code
+class SharedCounter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+    }
+
+    public synchronized void decrement() {
+        count--;
+    }
+
+    public synchronized int getCount() {
+        return count;
+    }
+}
+
+public class SynchronizationExample {
+    public static void main(String[] args) {
+        SharedCounter counter = new SharedCounter();
+
+        Thread incrementThread = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                counter.increment();
+            }
+        });
+
+        Thread decrementThread = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                counter.decrement();
+            }
+        });
+
+        incrementThread.start();
+        decrementThread.start();
+
+        try {
+            incrementThread.join();
+            decrementThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Final Count: " + counter.getCount());
+    }
+}
+Question 3: Thread Intercommunication with Wait and Notify
+
+java
+Copy code
+class PrintNumbers {
+    private int number = 1;
+    private final Object lock = new Object();
+
+    public void printOdd() {
+        synchronized (lock) {
+            while (number <= 10) {
+                if (number % 2 != 0) {
+                    System.out.println("Odd: " + number);
+                    number++;
+                    lock.notify();
+                } else {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public void printEven() {
+        synchronized (lock) {
+            while (number <= 10) {
+                if (number % 2 == 0) {
+                    System.out.println("Even: " + number);
+                    number++;
+                    lock.notify();
+                } else {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+}
+
+public class ThreadIntercommunication {
+    public static void main(String[] args) {
+        PrintNumbers printNumbers = new PrintNumbers();
+
+        Thread oddThread = new Thread(printNumbers::printOdd);
+        Thread evenThread = new Thread(printNumbers::printEven);
+
+        oddThread.start();
+        evenThread.start();
+    }
+}
+Question 4: Shared Counter with Synchronization
+
+java
+Copy code
+class SharedCounter {
+    private int count = 0;
+
+    public synchronized void increment() {
+        count++;
+    }
+
+    public synchronized int getCount() {
+        return count;
+    }
+}
+
+public class SharedCounterExample {
+    public static void main(String[] args) {
+        SharedCounter counter = new SharedCounter();
+
+        Thread thread1 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                counter.increment();
+            }
+        });
+
+        Thread thread2 = new Thread(() -> {
+            for (int i = 0; i < 1000; i++) {
+                counter.increment();
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+
+        try {
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Final Count: " + counter.getCount());
+    }
+}
+Question 5: Thread Pools with ExecutorService
+
+java
+Copy code
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+class Task implements Runnable {
+    private final int id;
+
+    public Task(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Task " + id + " executed by thread: " + Thread.currentThread().getName());
+    }
+}
+
+public class ThreadPoolExample {
+    public static void main(String[] args) {
+        int numberOfThreads = 3;
+        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
+
+        for (int i = 1; i <= 10; i++) {
+            Task task = new Task(i);
+            executorService.execute(task);
+        }
+
+        executorService.shutdown();
+    }
+}
+Question 6: Sequence of Threads
+
+java
+Copy code
+class PrintThread extends Thread {
+    private static final Object lock = new Object();
+    private static char nextThread = 'A';
+    private char threadChar;
+
+    public PrintThread(char threadChar) {
+        this.threadChar = threadChar;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            synchronized (lock) {
+                while (threadChar != nextThread) {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.print(threadChar);
+                nextThread = (char) ('A' + ((nextThread - 'A' + 1) % 3));
+                lock.notifyAll();
+            }
+        }
+    }
+}
+
+public class ThreadSequenceExample {
+    public static void main(String[] args) {
+        PrintThread threadA = new PrintThread('A');
+        PrintThread threadB = new PrintThread('B');
+        PrintThread threadC = new PrintThread('C');
+
+        threadA.start();
+        threadB.start();
+        threadC.start();
+    }
+}
+Question 7: Threads with Different Priorities
+
+java
+Copy code
+class PriorityThread extends Thread {
+    private String name;
+
+    public PriorityThread(String name, int priority) {
+        this.name = name;
+        setPriority(priority);
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println(name + " Running");
+        }
+    }
+}
+
+public class ThreadPriorityExample {
+    public static void main(String[] args) {
+        PriorityThread highPriority = new PriorityThread("High Priority", Thread.MAX_PRIORITY);
+        PriorityThread normalPriority = new PriorityThread("Normal Priority", Thread.NORM_PRIORITY);
+        PriorityThread lowPriority = new PriorityThread("Low Priority", Thread.MIN_PRIORITY);
+
+        highPriority.start();
+        normalPriority.start();
+        lowPriority.start();
+    }
+}
+Question 8: Create Thread using Runnable Interface
+
+java
+Copy code
+class NumberPrinter implements Runnable {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(i);
+        }
+    }
+}
+
+public class RunnableThreadExample {
+    public static void main(String[] args) {
+        NumberPrinter numberPrinter = new NumberPrinter();
+        Thread thread = new Thread(numberPrinter);
+        thread.start();
+    }
+}
+Question 9: Thread Sleep
+
+java
+Copy code
+class MessagePrinter extends Thread {
+    @Override
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println("Message " + i);
+            try {
+                Thread.sleep(2000); // Sleep for 2 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class ThreadSleepExample {
+    public static void main(String[] args) {
+        MessagePrinter messagePrinter = new MessagePrinter();
+        messagePrinter.start();
+    }
+}
+Question 10: Thread Join
+
+java
+Copy code
+class PrintThread extends Thread {
+    private String message;
+
+    public PrintThread(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(message);
+        }
+    }
+}
+
+public class ThreadJoinExample {
+    public static void main(String[] args) {
+        PrintThread threadA = new PrintThread("A");
+        PrintThread threadB = new PrintThread("B");
+
+        threadA.start();
+
+        try {
+            threadA.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        threadB.start();
+    }
+}
