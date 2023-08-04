@@ -1,0 +1,215 @@
+Pattern Questions:
+
+Question 1:
+
+java
+Copy code
+for (int i = 1; i <= 5; i++) {
+    for (int j = 1; j <= i; j++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}
+Question 2:
+
+java
+Copy code
+for (int i = 1; i <= 5; i++) {
+    for (int j = 5; j > i; j--) {
+        System.out.print(" ");
+    }
+    for (int k = 1; k <= i; k++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}
+Question 3:
+
+java
+Copy code
+for (int i = 5; i >= 1; i--) {
+    for (int j = 1; j <= i; j++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}
+Question 4:
+
+java
+Copy code
+for (int i = 1; i <= 5; i++) {
+    for (int j = 5; j > i; j--) {
+        System.out.print(" ");
+    }
+    for (int k = 1; k <= i; k++) {
+        System.out.print(k);
+    }
+    System.out.println();
+}
+Question 5:
+
+java
+Copy code
+for (int i = 5; i >= 1; i--) {
+    for (int j = 5; j > i; j--) {
+        System.out.print(" ");
+    }
+    for (int k = 1; k <= i; k++) {
+        System.out.print(i);
+    }
+    System.out.println();
+}
+Logic Questions:
+
+Question 6: Factorial of a Number
+
+java
+Copy code
+int number = 5;
+int factorial = 1;
+
+for (int i = 1; i <= number; i++) {
+    factorial *= i;
+}
+
+System.out.println("Factorial of " + number + " is: " + factorial);
+Question 7: Check Prime Number
+
+java
+Copy code
+int number = 17;
+boolean isPrime = true;
+
+if (number <= 1) {
+    isPrime = false;
+} else {
+    for (int i = 2; i <= Math.sqrt(number); i++) {
+        if (number % i == 0) {
+            isPrime = false;
+            break;
+        }
+    }
+}
+
+System.out.println(number + " is prime? " + isPrime);
+Question 8: Reverse a String
+
+java
+Copy code
+String original = "Hello, World!";
+String reversed = "";
+
+for (int i = original.length() - 1; i >= 0; i--) {
+    reversed += original.charAt(i);
+}
+
+System.out.println("Original: " + original);
+System.out.println("Reversed: " + reversed);
+Question 9: Sum of Digits
+
+java
+Copy code
+int number = 12345;
+int sum = 0;
+
+while (number > 0) {
+    sum += number % 10;
+    number /= 10;
+}
+
+System.out.println("Sum of digits: " + sum);
+Question 10: Swap Variables Without Third Variable
+
+java
+Copy code
+int a = 5, b = 10;
+a = a + b;
+b = a - b;
+a = a - b;
+
+System.out.println("After swapping: a = " + a + ", b = " + b);
+Question 11: Fibonacci Series
+
+java
+Copy code
+int n = 10;
+int first = 0, second = 1;
+
+System.out.print("Fibonacci Series: " + first + ", " + second);
+
+for (int i = 2; i < n; i++) {
+    int next = first + second;
+    System.out.print(", " + next);
+    first = second;
+    second = next;
+}
+Question 12: Find Largest and Smallest in an Array
+
+java
+Copy code
+int[] array = { 10, 5, 7, 21, 8, 15 };
+int smallest = array[0];
+int largest = array[0];
+
+for (int i = 1; i < array.length; i++) {
+    if (array[i] < smallest) {
+        smallest = array[i];
+    }
+    if (array[i] > largest) {
+        largest = array[i];
+    }
+}
+
+System.out.println("Smallest: " + smallest);
+System.out.println("Largest: " + largest);
+Question 13: Check Palindrome
+
+java
+Copy code
+String str = "madam";
+boolean isPalindrome = true;
+
+for (int i = 0, j = str.length() - 1; i < j; i++, j--) {
+    if (str.charAt(i) != str.charAt(j)) {
+        isPalindrome = false;
+        break;
+    }
+}
+
+System.out.println(str + " is a palindrome? " + isPalindrome);
+Question 14: Count Character Occurrences in String
+
+java
+Copy code
+String str = "hello";
+char target = 'l';
+int count = 0;
+
+for (int i = 0; i < str.length(); i++) {
+    if (str.charAt(i) == target) {
+        count++;
+    }
+}
+
+System.out.println("Number of occurrences of '" + target + "' in '" + str + "': " + count);
+Question 15: Print Prime Numbers Between Two Numbers
+
+java
+Copy code
+int start = 10, end = 50;
+
+for (int i = start; i <= end; i++) {
+    boolean isPrime = true;
+    if (i <= 1) {
+        continue;
+    }
+    for (int j = 2; j <= Math.sqrt(i); j++) {
+        if (i % j == 0) {
+            isPrime = false;
+            break;
+        }
+    }
+    if (isPrime) {
+        System.out.print(i + " ");
+    }
+}
