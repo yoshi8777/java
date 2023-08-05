@@ -1,3 +1,147 @@
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class LinkedListExample {
+    public static void main(String[] args) {
+        // Creating a linked list
+        Node head = new Node(1);
+        Node second = new Node(2);
+        Node third = new Node(3);
+
+        // Linking the nodes
+        head.next = second;
+        second.next = third;
+
+        // Traversing and printing the linked list
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+    }
+}
+
+---------------------------------------------
+    public class TwoDArrayExample {
+    public static void main(String[] args) {
+        // Creating a 2D array
+        int[][] matrix = new int[3][4];
+
+        // Initializing values
+        matrix[0][0] = 1;
+        matrix[0][1] = 2;
+        matrix[0][2] = 3;
+        matrix[0][3] = 4;
+
+        matrix[1][0] = 5;
+        matrix[1][1] = 6;
+        matrix[1][2] = 7;
+        matrix[1][3] = 8;
+
+        matrix[2][0] = 9;
+        matrix[2][1] = 10;
+        matrix[2][2] = 11;
+        matrix[2][3] = 12;
+
+        // Accessing and printing elements
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 4; col++) {
+                System.out.print(matrix[row][col] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+----------------------------------------------------------
+public class StringExample {
+    public static void main(String[] args) {
+        // Creating strings
+        String greeting = "Hello, ";
+        String name = "John";
+
+        // Concatenation using the + operator
+        String message = greeting + name;
+        System.out.println(message); // Output: Hello, John
+
+        // String length
+        int length = message.length();
+        System.out.println("Length of message: " + length); // Output: Length of message: 12
+
+        // String comparison
+        String anotherName = "Jane";
+        boolean isEqual = name.equals(anotherName);
+        System.out.println("Names are equal: " + isEqual); // Output: Names are equal: false
+
+        // Substring
+        String sub = message.substring(7); // Starting from index 7 (inclusive) to the end
+        System.out.println("Substring: " + sub); // Output: Substring: John
+
+        // Uppercase and lowercase
+        String uppercaseMessage = message.toUpperCase();
+        System.out.println("Uppercase message: " + uppercaseMessage); // Output: Uppercase message: HELLO, JOHN
+
+        String lowercaseMessage = message.toLowerCase();
+        System.out.println("Lowercase message: " + lowercaseMessage); // Output: Lowercase message: hello, john
+
+        // Searching within a string
+        boolean containsHello = message.contains("Hello");
+        System.out.println("Contains 'Hello': " + containsHello); // Output: Contains 'Hello': true
+
+        // Index of a character or substring
+        int index = message.indexOf("John");
+        System.out.println("Index of 'John': " + index); // Output: Index of 'John': 7
+    }
+}
+---------------------------------------------------------------
+    class Car {
+    String make;
+    String model;
+    int year;
+
+    // Default constructor
+    Car() {
+        make = "Unknown";
+        model = "Unknown";
+        year = 0;
+    }
+
+    // Parameterized constructor
+    Car(String make, String model, int year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+
+    // Method to display car information
+    void displayInfo() {
+        System.out.println("Make: " + make);
+        System.out.println("Model: " + model);
+        System.out.println("Year: " + year);
+    }
+}
+
+public class ConstructorExample {
+    public static void main(String[] args) {
+        // Using the default constructor
+        Car defaultCar = new Car();
+        System.out.println("Default Car:");
+        defaultCar.displayInfo();
+        
+        // Using the parameterized constructor
+        Car myCar = new Car("Toyota", "Camry", 2022);
+        System.out.println("\nMy Car:");
+        myCar.displayInfo();
+    }
+}
+
+
 class MyThread extends Thread {
     @Override
     public void run() {
